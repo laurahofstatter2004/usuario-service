@@ -1,0 +1,40 @@
+package Service;
+
+import LoginUsuario.Usuario;
+import LoginUsuario.UsuarioModel;
+import LoginUsuario.UsuarioRepo;
+import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class UsuarioService {
+
+   final UsuarioRepo usuarioRepo;
+
+    public UsuarioService(UsuarioRepo usuarioRepo) {
+        this.usuarioRepo = usuarioRepo;
+    }
+
+@Transactional
+    public Object save(UsuarioModel usuarioModel) {
+        return UsuarioRepo.save(usuarioModel);
+    }
+
+    public boolean existBySenha(String senha_usuario) {
+        return usuarioRepo.existBySenha(senha_usuario);
+    }
+
+    public boolean existByEmail(String email_usuario) {
+        return usuarioRepo.existByEmail(email_usuario);
+    }
+
+    public List<Usuario> findAll() {
+        return usuarioRepo.findAll();
+    }
+
+    public Optional<Usuario> findById(Integer id) {
+        return usuarioRepo.findById(id);
+    }
+}
